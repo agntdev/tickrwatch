@@ -1,19 +1,18 @@
 [
   {
-    "name": "/price",
+    "name": "/price shows watchlist",
     "steps": [
       {
+        "send": { "text": "/price" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "View current prices for watchlist or specific ticker"
+              "text": "📊 <b>Your Watchlist</b>\n\nTap a ticker to check its current price:",
+              "parse_mode": "HTML"
             }
           }
-        ],
-        "send": {
-          "text": "/price"
-        }
+        ]
       }
     ]
   }

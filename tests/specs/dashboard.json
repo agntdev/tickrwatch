@@ -1,19 +1,18 @@
 [
   {
-    "name": "/dashboard",
+    "name": "/dashboard shows owner metrics",
     "steps": [
       {
+        "send": { "text": "/dashboard" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "View aggregated usage and alert statistics"
+              "text": "📈 <b>Owner Dashboard</b>\n\n👥 Total Users: 1\n\n📊 <b>Alert Statistics</b>\nThreshold Alerts: 0\nPercent Move Alerts: 0\n\n🎯 <b>Alerts by Ticker</b>\nNo alerts triggered yet",
+              "parse_mode": "HTML"
             }
           }
-        ],
-        "send": {
-          "text": "/dashboard"
-        }
+        ]
       }
     ]
   }

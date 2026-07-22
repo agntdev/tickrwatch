@@ -1,17 +1,29 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
-// Menu: wire this into /start via registerMainMenuItem({ label: "Other", data: "add:custom" }) if the toolkit exposes it.
-
-const composer = new Composer();
+// Add custom ticker to watchlist - prompts user to enter ticker symbol
+const composer = new Composer<Ctx>();
 
 composer.callbackQuery("add:custom", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply("Add custom ticker to watchlist");
+  
+  // Set session step to await ticker input
+  ctx.session.step = "awaiting_ticker";
+  
+  const keyboard = inlineKeyboard([
+    [inlineButton("❌ Cancel", "menu:main")],
+  ]);
+  
+  await ctx.reply(
+    "Enter the ticker symbol for the cryptocurrency you want to track (e.g., SOL, XRP, ADA):",
+    {
+      reply_markup: {
+        ...keyboard,
+        force_reply: true,
+      },
+    }
+  );
 });
 
 export default composer;

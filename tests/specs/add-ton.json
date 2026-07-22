@@ -7,7 +7,8 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Add Toncoin to watchlist with default alert settings"
+              "text": "<b>Toncoin (TON)</b> added to your watchlist!\n\nCurrent price will be checked against your alert settings.\n\nChoose alert type to configure:",
+              "parse_mode": "HTML"
             }
           }
         ],

@@ -7,3 +7,5 @@ export * from "./session/memory.js";
 export * from "./session/redis.js";
 export * from "./telemetry/reporter.js";
 export * from "./harness/index.js";
+export * from "./persistent.js";
+export * from "./price-service.js";

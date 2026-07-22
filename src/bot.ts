@@ -6,7 +6,15 @@ import type { StorageAdapter } from "grammy";
 // bot grows. Durable domain data must NOT live here — use the toolkit's
 // persistent storage (see AGENTS.md).
 export interface Session {
-  // example: step?: "awaiting_amount";
+  // Step tracking for multi-step flows
+  step?: "idle" | "awaiting_ticker" | "awaiting_alert_config" | "awaiting_quiet_hours" | "awaiting_summary_time";
+  
+  // Temporary flow data (cleared after flow completes)
+  pendingTicker?: string;
+  pendingAlertType?: "threshold" | "percent";
+  pendingThreshold?: number;
+  pendingPercent?: number;
+  pendingLookback?: number;
 }
 
 export type Ctx = BotContext<Session>;
