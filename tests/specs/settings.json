@@ -1,0 +1,107 @@
+[
+  {
+    "name": "settings menu shows user preferences",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "menu:settings" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "⚙️ <b>Settings</b>\n\n🕐 Quiet Hours: Not set\n📊 Daily Summary: Not set\n⏱️ Alert Cooldown: 30 minutes\n\nConfigure your preferences:",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "quiet hours configuration prompt",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "menu:settings" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "⚙️ <b>Settings</b>\n\n🕐 Quiet Hours: Not set\n📊 Daily Summary: Not set\n⏱️ Alert Cooldown: 30 minutes\n\nConfigure your preferences:",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "settings:quiet:start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Enter quiet hours window in format: <b>HH:MM-HH:MM</b>\n\nExample: <code>22:00-07:00</code> (10 PM to 7 AM)",
+              "parse_mode": "HTML",
+              "reply_markup": {
+                "force_reply": true
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "cooldown configuration prompt",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "menu:settings" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "⚙️ <b>Settings</b>\n\n🕐 Quiet Hours: Not set\n📊 Daily Summary: Not set\n⏱️ Alert Cooldown: 30 minutes\n\nConfigure your preferences:",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "settings:cooldown:start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Current cooldown: <b>30 minutes</b>\n\nChoose a new cooldown period:",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -7,7 +7,10 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Add custom ticker to watchlist"
+              "text": "Enter the ticker symbol for the cryptocurrency you want to track (e.g., SOL, XRP, ADA):",
+              "reply_markup": {
+                "force_reply": true
+              }
             }
           }
         ],

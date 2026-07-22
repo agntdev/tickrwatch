@@ -1,17 +1,34 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { inlineButton, inlineKeyboard } from "../toolkit/index.js";
+import { addToWatchlist } from "../toolkit/index.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
-// Menu: wire this into /start via registerMainMenuItem({ label: "Ethereum", data: "add:ETH" }) if the toolkit exposes it.
-
-const composer = new Composer();
+// Add Ethereum to watchlist with default alert settings
+const composer = new Composer<Ctx>();
 
 composer.callbackQuery("add:ETH", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply("Add Ethereum to watchlist with default alert settings");
+  
+  const userId = String(ctx.from?.id ?? 0);
+  const item = await addToWatchlist(userId, "ETH", "Ethereum");
+  
+  // Show alert configuration menu
+  const keyboard = inlineKeyboard([
+    [inlineButton("📈 Threshold Alert", "alert:threshold:ETH")],
+    [inlineButton("📊 Percent Move", "alert:percent:ETH")],
+    [inlineButton("✅ Save with defaults", "alert:save:ETH")],
+    [inlineButton("❌ Cancel", "menu:main")],
+  ]);
+  
+  await ctx.reply(
+    `<b>Ethereum (ETH)</b> added to your watchlist!\n\n` +
+    `Current price will be checked against your alert settings.\n\n` +
+    `Choose alert type to configure:`,
+    {
+      reply_markup: keyboard,
+      parse_mode: "HTML",
+    }
+  );
 });
 
 export default composer;

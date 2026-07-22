@@ -1,19 +1,76 @@
 [
   {
-    "name": "/remove",
+    "name": "/remove shows watchlist with remove buttons",
     "steps": [
       {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "add:BTC" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Remove a ticker from watchlist"
+              "text": "<b>Bitcoin (BTC)</b> added to your watchlist!\n\nCurrent price will be checked against your alert settings.\n\nChoose alert type to configure:",
+              "parse_mode": "HTML"
             }
           }
-        ],
-        "send": {
-          "text": "/remove"
-        }
+        ]
+      },
+      {
+        "send": { "text": "/remove" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Select a ticker to remove from your watchlist:"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/remove with ticker argument removes from watchlist",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "add:BTC" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "<b>Bitcoin (BTC)</b> added to your watchlist!\n\nCurrent price will be checked against your alert settings.\n\nChoose alert type to configure:",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "text": "/remove BTC" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "<b>BTC</b> has been removed from your watchlist.",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
       }
     ]
   }

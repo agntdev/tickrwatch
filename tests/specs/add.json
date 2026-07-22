@@ -1,18 +1,40 @@
 [
   {
-    "name": "/add",
+    "name": "/add without arguments prompts for ticker",
     "steps": [
       {
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Add a new ticker to watchlist via text input"
+              "text": "Enter the ticker symbol for the cryptocurrency you want to track (e.g., BTC, ETH, SOL):",
+              "reply_markup": {
+                "force_reply": true
+              }
             }
           }
         ],
         "send": {
           "text": "/add"
+        }
+      }
+    ]
+  },
+  {
+    "name": "/add with ticker argument adds to watchlist",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "<b>SOL</b> added to your watchlist!\n\nCurrent price will be checked against your alert settings.\n\nChoose alert type to configure:",
+              "parse_mode": "HTML"
+            }
+          }
+        ],
+        "send": {
+          "text": "/add SOL"
         }
       }
     ]

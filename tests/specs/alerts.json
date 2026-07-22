@@ -1,0 +1,116 @@
+[
+  {
+    "name": "alert threshold configuration flow",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "add:BTC" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "<b>Bitcoin (BTC)</b> added to your watchlist!\n\nCurrent price will be checked against your alert settings.\n\nChoose alert type to configure:",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "alert:threshold:BTC" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Configure threshold alert for <b>BTC</b>:\n\nChoose alert direction:",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "alert percent move configuration flow",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "add:ETH" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "<b>Ethereum (ETH)</b> added to your watchlist!\n\nCurrent price will be checked against your alert settings.\n\nChoose alert type to configure:",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "alert:percent:ETH" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Configure percent move alert for <b>ETH</b>:\n\nChoose alert direction:",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "alert save with defaults",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "add:TON" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "<b>Toncoin (TON)</b> added to your watchlist!\n\nCurrent price will be checked against your alert settings.\n\nChoose alert type to configure:",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "alert:save:TON" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "<b>TON</b> has been added to your watchlist with default alert settings:\n\n• Threshold alerts: Enabled\n• Percent move alerts: Enabled\n• Lookback period: 1 hour\n• Cooldown: 30 minutes\n\nYou'll be notified when price conditions are met.",
+              "parse_mode": "HTML"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
